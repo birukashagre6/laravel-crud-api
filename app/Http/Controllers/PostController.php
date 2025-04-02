@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\post;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -20,7 +20,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        return Post::create($request->all());
     }
 
     /**
